@@ -12,8 +12,8 @@ import processing.core.PApplet;
 public class Character {
 	
 	public float x, y, radius;
-	public String name;
-	public MainApplet parent;
+	private String name;
+	private MainApplet parent;
 	private int episode;
 	private int color;
 	private ArrayList<Character> targets;
@@ -31,10 +31,14 @@ public class Character {
 	}
 
 	public void display(){
-		this.parent.stroke(color);
 		this.parent.fill(color);
 		this.parent.ellipse(this.x, this.y, this.radius, this.radius);
-		
+		/*if (this.mouseX == this.x && this.mouseY == this.y) {
+			this.parent.text(this.name, this.x, this.y);
+		}
+		else {
+			this.parent.text("", this.x, this.y);
+		}*/
 	}
 	
 }

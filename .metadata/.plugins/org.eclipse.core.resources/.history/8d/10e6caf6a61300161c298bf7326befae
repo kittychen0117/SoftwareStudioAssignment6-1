@@ -12,13 +12,13 @@ import processing.core.PApplet;
 public class Character {
 	
 	public float x, y, radius;
-	public String name;
-	public MainApplet parent;
+	private String name;
+	private PApplet parent;
 	private int episode;
 	private int color;
 	private ArrayList<Character> targets;
 
-	public Character(MainApplet parent, String name, float x, float y, int color){
+	public Character(PApplet parent, String name, float x, float y, int color){
 
 		this.parent = parent;
 		this.name = name;
@@ -31,10 +31,8 @@ public class Character {
 	}
 
 	public void display(){
-		this.parent.stroke(color);
 		this.parent.fill(color);
 		this.parent.ellipse(this.x, this.y, this.radius, this.radius);
-		
 	}
 	
 }

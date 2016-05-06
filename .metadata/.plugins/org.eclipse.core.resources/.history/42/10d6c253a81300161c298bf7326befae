@@ -31,10 +31,9 @@ public class Character {
 	}
 
 	public void display(){
-		this.parent.stroke(color);
 		this.parent.fill(color);
 		this.parent.ellipse(this.x, this.y, this.radius, this.radius);
-		
+
 	}
 	
 }

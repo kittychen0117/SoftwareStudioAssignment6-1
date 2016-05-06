@@ -31,10 +31,14 @@ public class Character {
 	}
 
 	public void display(){
-		this.parent.stroke(color);
 		this.parent.fill(color);
 		this.parent.ellipse(this.x, this.y, this.radius, this.radius);
-		
+		if (mouseX == this.x && mouseY == this.y) {
+			this.parent.text(this.name, this.x, this.y);
+		}
+		else {
+			this.parent.text("", this.x, this.y);
+		}
 	}
 	
 }
