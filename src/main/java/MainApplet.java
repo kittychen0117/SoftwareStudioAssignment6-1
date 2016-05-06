@@ -62,7 +62,7 @@ public class MainApplet extends PApplet{
 			JSONObject temp = nodes_episode_1.getJSONObject(i);
 			String name = temp.getString("name");
 			int color = Integer.valueOf(temp.getString("colour"));
-			characters_episode_1.add(new Character(this,name,color));
+			characters_episode_1.add(new Character(this,name,i*20,10,color));
 		}
 		for (int i=0;i<links_episode_1.size();i++){
 			JSONObject temp = links_episode_1.getJSONObject(i);
