@@ -13,25 +13,25 @@ public class Character {
 	
 	public float x, y, radius;
 	private String name;
-	private MainApplet parent;
+	private PApplet parent;
 	private int episode;
 	private int color;
 	private ArrayList<Character> targets;
 
-	public Character(MainApplet parent, String name, float x, float y, int color){
+	public Character(PApplet parent, String name, float x, float y){
 
 		this.parent = parent;
 		this.name = name;
 		this.x = x;
 		this.y = y;
-		this.radius = 10;
-		this.color = color;
+		this.radius = 30;
+		this.color = 153;
 		targets = new ArrayList<Character>();
 
 	}
 
 	public void display(){
-		this.parent.fill(color);
+		this.parent.fill(153, 204, 255);
 		this.parent.ellipse(this.x, this.y, this.radius, this.radius);
 	}
 	

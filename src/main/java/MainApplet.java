@@ -36,9 +36,9 @@ public class MainApplet extends PApplet{
 	
 	public void setup() {
 
-		size(width, height);
-		smooth();
-		loadData();
+		size(1200, 650);
+		background(204, 153, 255);
+		
 		characters_episode_1 = new ArrayList<Character>();
 		characters_episode_2 = new ArrayList<Character>();
 		characters_episode_3 = new ArrayList<Character>();
@@ -46,6 +46,9 @@ public class MainApplet extends PApplet{
 		characters_episode_5 = new ArrayList<Character>();
 		characters_episode_6 = new ArrayList<Character>();
 		characters_episode_7 = new ArrayList<Character>();
+		
+		loadData();
+		smooth();
 	}
 
 	public void draw() {
@@ -61,8 +64,9 @@ public class MainApplet extends PApplet{
 		for (int i=0;i<nodes_episode_1.size();i++){
 			JSONObject temp = nodes_episode_1.getJSONObject(i);
 			String name = temp.getString("name");
-			int color = Integer.valueOf(temp.getString("colour"));
-			characters_episode_1.add(new Character(this,name,i*20,10,color));
+			String tmp = temp.getString("colour");
+			//int color = Integer.valueOf(tmp);
+			characters_episode_1.add(new Character(this,name,i*40+40,20));
 		}
 		for (int i=0;i<links_episode_1.size();i++){
 			JSONObject temp = links_episode_1.getJSONObject(i);
@@ -72,7 +76,7 @@ public class MainApplet extends PApplet{
 			//characters_episode_1.get(source).addTarget(characters_episode_1.get(target));
 		}
 		
-		data_episode_2 = loadJSONObject(path+file2);
+		/*data_episode_2 = loadJSONObject(path+file2);
 		nodes_episode_2 = data_episode_2.getJSONArray("nodes");
 		links_episode_2 = data_episode_2.getJSONArray("links");
 		for (int i=0;i<nodes_episode_2.size();i++){
@@ -172,7 +176,7 @@ public class MainApplet extends PApplet{
 			int target = temp.getInt("target");
 			int value = temp.getInt("value");
 			//characters_episode_7.get(source).addTarget(characters_episode_7.get(target));
-		}
+		}*/
 	}
 
 }
