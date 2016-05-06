@@ -24,7 +24,7 @@ public class Character {
 		this.name = name;
 		this.x = x;
 		this.y = y;
-		this.radius = 30;
+		this.radius = 10;
 		this.color = color;
 		targets = new ArrayList<Character>();
 

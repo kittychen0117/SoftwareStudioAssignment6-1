@@ -13,18 +13,18 @@ public class Character {
 	
 	public float x, y, radius;
 	private String name;
-	private PApplet parent;
+	private MainApplet parent;
 	private int episode;
 	private int color;
 	private ArrayList<Character> targets;
 
-	public Character(PApplet parent, String name, float x, float y, int color){
+	public Character(MainApplet parent, String name, float x, float y, int color){
 
 		this.parent = parent;
 		this.name = name;
 		this.x = x;
 		this.y = y;
-		this.radius = 30;
+		this.radius = 10;
 		this.color = color;
 		targets = new ArrayList<Character>();
 

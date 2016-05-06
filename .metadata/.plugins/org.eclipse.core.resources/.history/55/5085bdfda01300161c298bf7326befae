@@ -65,8 +65,8 @@ public class MainApplet extends PApplet{
 			JSONObject temp = nodes_episode_1.getJSONObject(i);
 			String name = temp.getString("name");
 			String tmp = temp.getString("colour");
-			int color = Long.decode(tmp).intValue();
-			characters_episode_1.add(new Character(this,name,(float)20+(i%4)*40,(float)40+(i/4)*40,color));
+			//int color = Integer.valueOf(tmp);
+			characters_episode_1.add(new Character(this,name,i*40+40,20));
 		}
 		for (int i=0;i<links_episode_1.size();i++){
 			JSONObject temp = links_episode_1.getJSONObject(i);
@@ -83,7 +83,7 @@ public class MainApplet extends PApplet{
 			JSONObject temp = nodes_episode_2.getJSONObject(i);
 			String name = temp.getString("name");
 			int color = Integer.valueOf(temp.getString("colour"));
-			characters_episode_2.add(new Character(this,name,(float)20+(i%4)*40,(float)40+(i/4)*40,color));
+			characters_episode_2.add(new Character(this,name,color));
 		}
 		for (int i=0;i<links_episode_2.size();i++){
 			JSONObject temp = links_episode_2.getJSONObject(i);
@@ -100,7 +100,7 @@ public class MainApplet extends PApplet{
 			JSONObject temp = nodes_episode_3.getJSONObject(i);
 			String name = temp.getString("name");
 			int color = Integer.valueOf(temp.getString("colour"));
-			characters_episode_3.add(new Character(this,name,(float)20+(i%4)*40,(float)40+(i/4)*40,color));
+			characters_episode_3.add(new Character(this,name,color));
 		}
 		for (int i=0;i<links_episode_3.size();i++){
 			JSONObject temp = links_episode_3.getJSONObject(i);
@@ -117,7 +117,7 @@ public class MainApplet extends PApplet{
 			JSONObject temp = nodes_episode_4.getJSONObject(i);
 			String name = temp.getString("name");
 			int color = Integer.valueOf(temp.getString("colour"));
-			characters_episode_4.add(new Character(this,name,(float)20+(i%4)*40,(float)40+(i/4)*40,color));
+			characters_episode_4.add(new Character(this,name,color));
 		}
 		for (int i=0;i<links_episode_4.size();i++){
 			JSONObject temp = links_episode_4.getJSONObject(i);
@@ -134,7 +134,7 @@ public class MainApplet extends PApplet{
 			JSONObject temp = nodes_episode_5.getJSONObject(i);
 			String name = temp.getString("name");
 			int color = Integer.valueOf(temp.getString("colour"));
-			characters_episode_5.add(new Character(this,name,(float)20+(i%4)*40,(float)40+(i/4)*40,color));
+			characters_episode_5.add(new Character(this,name,color));
 		}
 		for (int i=0;i<links_episode_5.size();i++){
 			JSONObject temp = links_episode_5.getJSONObject(i);
@@ -151,7 +151,7 @@ public class MainApplet extends PApplet{
 			JSONObject temp = nodes_episode_6.getJSONObject(i);
 			String name = temp.getString("name");
 			int color = Integer.valueOf(temp.getString("colour"));
-			characters_episode_6.add(new Character(this,name,(float)20+(i%4)*40,(float)40+(i/4)*40,color));
+			characters_episode_6.add(new Character(this,name,color));
 		}
 		for (int i=0;i<links_episode_6.size();i++){
 			JSONObject temp = links_episode_6.getJSONObject(i);
@@ -168,7 +168,7 @@ public class MainApplet extends PApplet{
 			JSONObject temp = nodes_episode_7.getJSONObject(i);
 			String name = temp.getString("name");
 			int color = Integer.valueOf(temp.getString("colour"));
-			characters_episode_7.add(new Character(this,name,(float)20+(i%4)*40,(float)40+(i/4)*40,color));
+			characters_episode_7.add(new Character(this,name,color));
 		}
 		for (int i=0;i<links_episode_7.size();i++){
 			JSONObject temp = links_episode_7.getJSONObject(i);
