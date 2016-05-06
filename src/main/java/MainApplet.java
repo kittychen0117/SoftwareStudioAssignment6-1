@@ -31,13 +31,14 @@ public class MainApplet extends PApplet{
 	JSONArray nodes_episode_7, links_episode_7;
 	
 	private ArrayList<Character> characters_episode_1,characters_episode_2,characters_episode_3,characters_episode_4,characters_episode_5,characters_episode_6,characters_episode_7;
+	private Network network;
 	
 	private final static int width = 1200, height = 650;
 	
 	public void setup() {
 
 		size(1200, 650);
-		background(204, 153, 255);
+		background(255, 255, 255);
 		
 		characters_episode_1 = new ArrayList<Character>();
 		characters_episode_2 = new ArrayList<Character>();
@@ -47,11 +48,14 @@ public class MainApplet extends PApplet{
 		characters_episode_6 = new ArrayList<Character>();
 		characters_episode_7 = new ArrayList<Character>();
 		
+		network = new Network(this);
+		
 		loadData();
 		smooth();
 	}
 
 	public void draw() {
+		network.display();
 		for (int i=0;i<characters_episode_1.size();i++){
 			characters_episode_1.get(i).display();
 		}
