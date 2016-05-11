@@ -15,10 +15,10 @@ public class Character {
 	private boolean insideNetwork;
 	private int color;
 	private ArrayList<Character> targets;
-	private HashMap<String, Integer> value;
-	private float localX,localY;
+	private HashMap<String, Integer> value;//line weight
+	private float localX,localY;//original position
 
-	public Character(MainApplet parent, String name, float x, float y, int color){
+	public Character(MainApplet parent, String name, float x, float y, int color){//initial
 
 		this.parent = parent;
 		this.name = name;
@@ -33,35 +33,35 @@ public class Character {
 		this.value = new HashMap<String, Integer>();
 	}
 
-	public void display(){
+	public void display(){//draw a circle is filled
 		this.parent.noStroke();
 		this.parent.fill(color);
 		this.parent.ellipse(this.x, this.y, this.radius, this.radius);
 	}
-	public void setPosition(float x,float y){
+	public void setPosition(float x,float y){//set the character's position
 		this.x = x;
 		this.y = y;
 	}
-	public void setlocal(){
+	public void setlocal(){//to put original position
 		this.x = this.localX;
 		this.y = this.localY;
 	}
-	public void addTarget(Character target,int v){
+	public void addTarget(Character target,int v){//add targets and the line weight
 		this.targets.add(target);
 		this.value.put(target.name, v);
 	}
 	
-	public ArrayList<Character> getTargets(){
+	public ArrayList<Character> getTargets(){//to get the target
 		return this.targets;
 	}
-	public void setInsideNetwork(boolean s){
+	public void setInsideNetwork(boolean s){//set whether is inside the network or not
 		this.insideNetwork = s;
 	}
-	public boolean getInsideNetwork(){
+	public boolean getInsideNetwork(){//get whether is inside the network or not
 		return this.insideNetwork;
 	}
 	
-	public int getvalue(String n){
+	public int getvalue(String n){//get the line weight
 		return value.get(n);
 	}
 }

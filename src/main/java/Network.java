@@ -26,14 +26,15 @@ public class Network {
 	}
 
 	public void display(){
-		this.parent.fill(256,256,256);
+		this.parent.fill(256,256,256);//draw a big circle
 		this.parent.stroke(204, 255, 102);
 		this.parent.strokeWeight(5);
 		this.parent.ellipse(x, y, radius, radius);
+		
 		for (int i=0;i<ch_innet.size();i++){
 			for (int j=0;j<ch_innet.get(i).getTargets().size();j++){
-				if (ch_innet.get(i).getTargets().get(j).getInsideNetwork()){
-					this.parent.noFill();
+				if (ch_innet.get(i).getTargets().get(j).getInsideNetwork()){//the target should be in the circle
+					this.parent.noFill();//draw the line
 					this.parent.stroke(0, 0, 0);
 					this.parent.strokeWeight(ch_innet.get(i).getvalue(ch_innet.get(i).getTargets().get(j).name)*6/13);
 					this.parent.bezier(ch_innet.get(i).x, ch_innet.get(i).y, x, y, x, y,
@@ -46,10 +47,10 @@ public class Network {
 	
 	public void arrangePosition(){
 		for (int i=0;i<this.ch_innet.size();i++){
-			double lenth = (double)this.ch_innet.size();
-			double part = i/lenth;
-			double r_x = this.radius/2*Math.sin(part*2*Math.PI);
-			double r_y = this.radius/2*Math.cos(part*2*Math.PI);
+			double lenth = (double)this.ch_innet.size();//get the size
+			double part = i/lenth;//to distribute lenth part
+			double r_x = this.radius/2*Math.sin(part*2*Math.PI);//to get the distance to x
+			double r_y = this.radius/2*Math.cos(part*2*Math.PI);//to get the distance to y
 			/*System.out.println(part);
 			System.out.println(r_x);
 			System.out.println(r_y);*/
