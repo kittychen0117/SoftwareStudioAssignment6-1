@@ -1,6 +1,5 @@
 package main.java;
 
-import java.awt.Color;
 import java.util.ArrayList;
 
 import processing.core.PApplet;
@@ -36,9 +35,10 @@ public class Network {
 				if (ch_innet.get(i).getTargets().get(j).getInsideNetwork()){
 					this.parent.noFill();
 					this.parent.stroke(0, 0, 0);
-					this.parent.strokeWeight(1);
+					this.parent.strokeWeight(ch_innet.get(i).getvalue(ch_innet.get(i).getTargets().get(j).name)*6/13);
 					this.parent.bezier(ch_innet.get(i).x, ch_innet.get(i).y, x, y, x, y,
 					ch_innet.get(i).getTargets().get(j).x, ch_innet.get(i).getTargets().get(j).y);
+					this.parent.strokeWeight(1);
 				}
 			}
 		}

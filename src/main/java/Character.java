@@ -1,10 +1,7 @@
 package main.java;
 
-import java.awt.Color;
 import java.util.ArrayList;
-
-import processing.core.PApplet;
-import processing.core.PShape;
+import java.util.HashMap;
 
 /**
 * This class is used to store states of the characters in the program.
@@ -18,6 +15,7 @@ public class Character {
 	private boolean insideNetwork;
 	private int color;
 	private ArrayList<Character> targets;
+	private HashMap<String, Integer> value;
 	private float localX,localY;
 
 	public Character(MainApplet parent, String name, float x, float y, int color){
@@ -31,7 +29,8 @@ public class Character {
 		this.radius = 40;
 		this.color = color;
 		this.insideNetwork = false;
-		targets = new ArrayList<Character>();
+		this.targets = new ArrayList<Character>();
+		this.value = new HashMap<String, Integer>();
 	}
 
 	public void display(){
@@ -47,8 +46,9 @@ public class Character {
 		this.x = this.localX;
 		this.y = this.localY;
 	}
-	public void addTarget(Character target){
+	public void addTarget(Character target,int v){
 		this.targets.add(target);
+		this.value.put(target.name, v);
 	}
 	
 	public ArrayList<Character> getTargets(){
@@ -59,5 +59,9 @@ public class Character {
 	}
 	public boolean getInsideNetwork(){
 		return this.insideNetwork;
+	}
+	
+	public int getvalue(String n){
+		return value.get(n);
 	}
 }
