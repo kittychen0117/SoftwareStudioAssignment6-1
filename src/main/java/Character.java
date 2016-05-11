@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 import processing.core.PApplet;
+import processing.core.PShape;
 
 /**
 * This class is used to store states of the characters in the program.
@@ -27,14 +28,13 @@ public class Character {
 		this.radius = 30;
 		this.color = color;
 		targets = new ArrayList<Character>();
-
 	}
 
 	public void display(){
 		this.parent.stroke(color);
 		this.parent.fill(color);
 		this.parent.ellipse(this.x, this.y, this.radius, this.radius);
-		
+		this.parent.fill(0,0,0);
 	}
 	
 }

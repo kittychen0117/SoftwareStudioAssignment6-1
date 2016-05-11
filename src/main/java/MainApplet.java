@@ -3,6 +3,7 @@ package main.java;
 import java.util.ArrayList;
 
 import processing.core.PApplet;
+import processing.core.PShape;
 import processing.data.JSONArray;
 import processing.data.JSONObject;
 
@@ -13,26 +14,20 @@ import processing.data.JSONObject;
 @SuppressWarnings("serial")
 public class MainApplet extends PApplet{
 	private String path = "main/resources/";
-	private String file1 = "starwars-episode-1-interactions.json";
-	private String file2 = "starwars-episode-2-interactions.json";
-	private String file3 = "starwars-episode-3-interactions.json";
-	private String file4 = "starwars-episode-4-interactions.json";
-	private String file5 = "starwars-episode-5-interactions.json";
-	private String file6 = "starwars-episode-6-interactions.json";
-	private String file7 = "starwars-episode-7-interactions.json";
+	private String file[] = {"starwars-episode-1-interactions.json",
+							"starwars-episode-2-interactions.json",
+							"starwars-episode-3-interactions.json",
+							"starwars-episode-4-interactions.json",
+							"starwars-episode-5-interactions.json",
+							"starwars-episode-6-interactions.json",
+							"starwars-episode-7-interactions.json"};
 	
-	JSONObject data_episode_1,data_episode_2,data_episode_3,data_episode_4,data_episode_5,data_episode_6,data_episode_7;
-	JSONArray nodes_episode_1, links_episode_1;
-	JSONArray nodes_episode_2, links_episode_2;
-	JSONArray nodes_episode_3, links_episode_3;
-	JSONArray nodes_episode_4, links_episode_4;
-	JSONArray nodes_episode_5, links_episode_5;
-	JSONArray nodes_episode_6, links_episode_6;
-	JSONArray nodes_episode_7, links_episode_7;
+	JSONObject data;
+	JSONArray nodes, links;
 	
-	private ArrayList<Character> characters_episode_1,characters_episode_2,characters_episode_3,characters_episode_4,characters_episode_5,characters_episode_6,characters_episode_7;
+	private ArrayList<Character> characters;
 	private Network network;
-	
+
 	private final static int width = 1200, height = 650;
 	
 	public void setup() {
@@ -40,13 +35,7 @@ public class MainApplet extends PApplet{
 		size(1200, 650);
 		background(255, 255, 255);
 		
-		characters_episode_1 = new ArrayList<Character>();
-		characters_episode_2 = new ArrayList<Character>();
-		characters_episode_3 = new ArrayList<Character>();
-		characters_episode_4 = new ArrayList<Character>();
-		characters_episode_5 = new ArrayList<Character>();
-		characters_episode_6 = new ArrayList<Character>();
-		characters_episode_7 = new ArrayList<Character>();
+		characters = new ArrayList<Character>();
 		
 		network = new Network(this);
 		
@@ -55,132 +44,41 @@ public class MainApplet extends PApplet{
 	}
 
 	public void draw() {
+		background(255,255,255);
 		network.display();
-		for (int i=0;i<characters_episode_1.size();i++){
-			characters_episode_1.get(i).display();
+		for (int i=0;i<characters.size();i++){
+			characters.get(i).display();
+		}
+		for (int i=0;i<characters.size();i++){
+			if ((characters.get(i).x-mouseX)*(characters.get(i).x-mouseX)+
+				(characters.get(i).y-mouseY)*(characters.get(i).y-mouseY)<300){
+				this.fill(153, 204, 255);
+				this.stroke(153,204,255);
+				this.rect(characters.get(i).x-15,characters.get(i).y-30,100,20,3);
+				this.fill(0, 0, 0);
+				this.text(characters.get(i).name, characters.get(i).x-15, characters.get(i).y-15);
+			}
 		}
 	}
 
 	private void loadData(){
-		data_episode_1 = loadJSONObject(path+file1);
-		nodes_episode_1 = data_episode_1.getJSONArray("nodes");
-		links_episode_1 = data_episode_1.getJSONArray("links");
-		for (int i=0;i<nodes_episode_1.size();i++){
-			JSONObject temp = nodes_episode_1.getJSONObject(i);
+		data = loadJSONObject(path+file[0]);
+		nodes = data.getJSONArray("nodes");
+		links = data.getJSONArray("links");
+		for (int i=0;i<nodes.size();i++){
+			JSONObject temp = nodes.getJSONObject(i);
 			String name = temp.getString("name");
 			String tmp = temp.getString("colour");
 			int color = Long.decode(tmp).intValue();
-			characters_episode_1.add(new Character(this,name,(float)20+(i%4)*40,(float)40+(i/4)*40,color));
+			characters.add(new Character(this,name,(float)20+(i%4)*40,(float)40+(i/4)*40,color));
 		}
-		for (int i=0;i<links_episode_1.size();i++){
-			JSONObject temp = links_episode_1.getJSONObject(i);
+		for (int i=0;i<links.size();i++){
+			JSONObject temp = links.getJSONObject(i);
 			int source = temp.getInt("source");
 			int target = temp.getInt("target");
 			int value = temp.getInt("value");
 			//characters_episode_1.get(source).addTarget(characters_episode_1.get(target));
 		}
-		
-		/*data_episode_2 = loadJSONObject(path+file2);
-		nodes_episode_2 = data_episode_2.getJSONArray("nodes");
-		links_episode_2 = data_episode_2.getJSONArray("links");
-		for (int i=0;i<nodes_episode_2.size();i++){
-			JSONObject temp = nodes_episode_2.getJSONObject(i);
-			String name = temp.getString("name");
-			int color = Integer.valueOf(temp.getString("colour"));
-			characters_episode_2.add(new Character(this,name,(float)20+(i%4)*40,(float)40+(i/4)*40,color));
-		}
-		for (int i=0;i<links_episode_2.size();i++){
-			JSONObject temp = links_episode_2.getJSONObject(i);
-			int source = temp.getInt("source");
-			int target = temp.getInt("target");
-			int value = temp.getInt("value");
-			//characters_episode_2.get(source).addTarget(characters_episode_2.get(target));
-		}
-		
-		data_episode_3 = loadJSONObject(path+file3);
-		nodes_episode_3 = data_episode_3.getJSONArray("nodes");
-		links_episode_3 = data_episode_3.getJSONArray("links");
-		for (int i=0;i<nodes_episode_3.size();i++){
-			JSONObject temp = nodes_episode_3.getJSONObject(i);
-			String name = temp.getString("name");
-			int color = Integer.valueOf(temp.getString("colour"));
-			characters_episode_3.add(new Character(this,name,(float)20+(i%4)*40,(float)40+(i/4)*40,color));
-		}
-		for (int i=0;i<links_episode_3.size();i++){
-			JSONObject temp = links_episode_3.getJSONObject(i);
-			int source = temp.getInt("source");
-			int target = temp.getInt("target");
-			int value = temp.getInt("value");
-			//characters_episode_3.get(source).addTarget(characters_episode_3.get(target));
-		}
-		
-		data_episode_4 = loadJSONObject(path+file4);
-		nodes_episode_4 = data_episode_4.getJSONArray("nodes");
-		links_episode_4 = data_episode_4.getJSONArray("links");
-		for (int i=0;i<nodes_episode_4.size();i++){
-			JSONObject temp = nodes_episode_4.getJSONObject(i);
-			String name = temp.getString("name");
-			int color = Integer.valueOf(temp.getString("colour"));
-			characters_episode_4.add(new Character(this,name,(float)20+(i%4)*40,(float)40+(i/4)*40,color));
-		}
-		for (int i=0;i<links_episode_4.size();i++){
-			JSONObject temp = links_episode_4.getJSONObject(i);
-			int source = temp.getInt("source");
-			int target = temp.getInt("target");
-			int value = temp.getInt("value");
-			//characters_episode_4.get(source).addTarget(characters_episode_4.get(target));
-		}
-		
-		data_episode_5 = loadJSONObject(path+file5);
-		nodes_episode_5 = data_episode_5.getJSONArray("nodes");
-		links_episode_5 = data_episode_5.getJSONArray("links");
-		for (int i=0;i<nodes_episode_5.size();i++){
-			JSONObject temp = nodes_episode_5.getJSONObject(i);
-			String name = temp.getString("name");
-			int color = Integer.valueOf(temp.getString("colour"));
-			characters_episode_5.add(new Character(this,name,(float)20+(i%4)*40,(float)40+(i/4)*40,color));
-		}
-		for (int i=0;i<links_episode_5.size();i++){
-			JSONObject temp = links_episode_5.getJSONObject(i);
-			int source = temp.getInt("source");
-			int target = temp.getInt("target");
-			int value = temp.getInt("value");
-			//characters_episode_5.get(source).addTarget(characters_episode_5.get(target));
-		}
-		
-		data_episode_6 = loadJSONObject(path+file6);
-		nodes_episode_6 = data_episode_6.getJSONArray("nodes");
-		links_episode_6 = data_episode_6.getJSONArray("links");
-		for (int i=0;i<nodes_episode_6.size();i++){
-			JSONObject temp = nodes_episode_6.getJSONObject(i);
-			String name = temp.getString("name");
-			int color = Integer.valueOf(temp.getString("colour"));
-			characters_episode_6.add(new Character(this,name,(float)20+(i%4)*40,(float)40+(i/4)*40,color));
-		}
-		for (int i=0;i<links_episode_6.size();i++){
-			JSONObject temp = links_episode_6.getJSONObject(i);
-			int source = temp.getInt("source");
-			int target = temp.getInt("target");
-			int value = temp.getInt("value");
-			//characters_episode_6.get(source).addTarget(characters_episode_6.get(target));
-		}
-		
-		data_episode_7 = loadJSONObject(path+file7);
-		nodes_episode_7 = data_episode_7.getJSONArray("nodes");
-		links_episode_7 = data_episode_7.getJSONArray("links");
-		for (int i=0;i<nodes_episode_7.size();i++){
-			JSONObject temp = nodes_episode_7.getJSONObject(i);
-			String name = temp.getString("name");
-			int color = Integer.valueOf(temp.getString("colour"));
-			characters_episode_7.add(new Character(this,name,(float)20+(i%4)*40,(float)40+(i/4)*40,color));
-		}
-		for (int i=0;i<links_episode_7.size();i++){
-			JSONObject temp = links_episode_7.getJSONObject(i);
-			int source = temp.getInt("source");
-			int target = temp.getInt("target");
-			int value = temp.getInt("value");
-			//characters_episode_7.get(source).addTarget(characters_episode_7.get(target));
-		}*/
 	}
 
 }
