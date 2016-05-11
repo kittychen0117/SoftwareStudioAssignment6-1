@@ -18,6 +18,7 @@ public class Character {
 	private int episode;
 	private int color;
 	private ArrayList<Character> targets;
+	private float localX,localY;
 
 	public Character(MainApplet parent, String name, float x, float y, int color){
 
@@ -25,6 +26,8 @@ public class Character {
 		this.name = name;
 		this.x = x;
 		this.y = y;
+		this.localX = x;
+		this.localY = y;
 		this.radius = 30;
 		this.color = color;
 		targets = new ArrayList<Character>();
@@ -36,5 +39,19 @@ public class Character {
 		this.parent.ellipse(this.x, this.y, this.radius, this.radius);
 		this.parent.fill(0,0,0);
 	}
+	public void setPosition(float x,float y){
+		this.x = x;
+		this.y = y;
+	}
+	public void setlocal(){
+		this.x = this.localX;
+		this.y = this.localY;
+	}
+	public void addTarget(Character target){
+		this.targets.add(target);
+	}
 	
+	public ArrayList<Character> getTargets(){
+		return this.targets;
+	}
 }

@@ -26,6 +26,7 @@ public class MainApplet extends PApplet{
 	JSONArray nodes, links;
 	
 	private ArrayList<Character> characters;
+	private Character ch_now;
 	private Network network;
 
 	private final static int width = 1200, height = 650;
@@ -54,7 +55,7 @@ public class MainApplet extends PApplet{
 				(characters.get(i).y-mouseY)*(characters.get(i).y-mouseY)<300){
 				this.fill(153, 204, 255);
 				this.stroke(153,204,255);
-				this.rect(characters.get(i).x-15,characters.get(i).y-30,100,20,3);
+				this.rect(characters.get(i).x-15,characters.get(i).y-30,characters.get(i).name.length()*10,20,3);
 				this.fill(0, 0, 0);
 				this.text(characters.get(i).name, characters.get(i).x-15, characters.get(i).y-15);
 			}
@@ -77,8 +78,32 @@ public class MainApplet extends PApplet{
 			int source = temp.getInt("source");
 			int target = temp.getInt("target");
 			int value = temp.getInt("value");
-			//characters_episode_1.get(source).addTarget(characters_episode_1.get(target));
+			characters.get(source).addTarget(characters.get(target));
 		}
 	}
-
+	public void mouseDragged(){
+		if (ch_now!=null){
+			ch_now.setPosition(mouseX, mouseY);
+		}
+	}
+	public void mousePressed(){
+		for (int i=0;i<characters.size();i++){
+			if ((characters.get(i).x-mouseX)*(characters.get(i).x-mouseX)+
+				(characters.get(i).y-mouseY)*(characters.get(i).y-mouseY)<300){
+				ch_now = characters.get(i);
+			}
+		}
+	}
+	public void mouseReleased(){
+		if (ch_now!=null){
+			
+			if ((ch_now.x-network.x)*(ch_now.x-network.x)+(ch_now.y-network.y)*(ch_now.y-network.y)<70000){
+				this.network.addnode(ch_now);
+				this.network.arrangePosition();
+			}
+			else {
+				ch_now.setlocal();
+			}
+		}
+	}
 }
