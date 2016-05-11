@@ -54,10 +54,10 @@ public class MainApplet extends PApplet{
 			if ((characters.get(i).x-mouseX)*(characters.get(i).x-mouseX)+
 				(characters.get(i).y-mouseY)*(characters.get(i).y-mouseY)<300){
 				this.fill(153, 204, 255);
-				this.stroke(153,204,255);
-				this.rect(characters.get(i).x-15,characters.get(i).y-30,characters.get(i).name.length()*10,20,3);
+				this.noStroke();
+				this.rect(characters.get(i).x-20,characters.get(i).y-40,characters.get(i).name.length()*10,30,3);
 				this.fill(0, 0, 0);
-				this.text(characters.get(i).name, characters.get(i).x-15, characters.get(i).y-15);
+				this.text(characters.get(i).name, characters.get(i).x-15, characters.get(i).y-20);
 			}
 		}
 	}
@@ -71,7 +71,7 @@ public class MainApplet extends PApplet{
 			String name = temp.getString("name");
 			String tmp = temp.getString("colour");
 			int color = Long.decode(tmp).intValue();
-			characters.add(new Character(this,name,(float)20+(i%4)*40,(float)40+(i/4)*40,color));
+			characters.add(new Character(this,name,(float)30+(i%4)*50,(float)40+(i/4)*50,color));
 		}
 		for (int i=0;i<links.size();i++){
 			JSONObject temp = links.getJSONObject(i);
@@ -97,12 +97,20 @@ public class MainApplet extends PApplet{
 	public void mouseReleased(){
 		if (ch_now!=null){
 			
-			if ((ch_now.x-network.x)*(ch_now.x-network.x)+(ch_now.y-network.y)*(ch_now.y-network.y)<70000){
+			if ((ch_now.x-network.x)*(ch_now.x-network.x)+(ch_now.y-network.y)*(ch_now.y-network.y)<70000&&ch_now.getInsideNetwork()==false){
 				this.network.addnode(ch_now);
 				this.network.arrangePosition();
+				ch_now.setInsideNetwork(true);
+			}
+			else if (ch_now.getInsideNetwork()&&(ch_now.x-network.x)*(ch_now.x-network.x)+(ch_now.y-network.y)*(ch_now.y-network.y)>=70000){
+				ch_now.setlocal();
+				ch_now.setInsideNetwork(false);
+				this.network.removenode(ch_now);
 			}
 			else {
 				ch_now.setlocal();
+				ch_now.setInsideNetwork(false);
+				ch_now = null;
 			}
 		}
 	}

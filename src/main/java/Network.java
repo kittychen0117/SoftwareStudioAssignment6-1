@@ -31,6 +31,17 @@ public class Network {
 		this.parent.stroke(204, 255, 102);
 		this.parent.strokeWeight(5);
 		this.parent.ellipse(x, y, radius, radius);
+		for (int i=0;i<ch_innet.size();i++){
+			for (int j=0;j<ch_innet.get(i).getTargets().size();j++){
+				if (ch_innet.get(i).getTargets().get(j).getInsideNetwork()){
+					this.parent.noFill();
+					this.parent.stroke(0, 0, 0);
+					this.parent.strokeWeight(1);
+					this.parent.bezier(ch_innet.get(i).x, ch_innet.get(i).y, x, y, x, y,
+					ch_innet.get(i).getTargets().get(j).x, ch_innet.get(i).getTargets().get(j).y);
+				}
+			}
+		}
 	}
 	
 	public void arrangePosition(){
@@ -51,5 +62,8 @@ public class Network {
 	}
 	public void addnode(Character ch){
 		this.ch_innet.add(ch);
+	}
+	public void removenode(Character ch){
+		this.ch_innet.remove(ch);
 	}
 }

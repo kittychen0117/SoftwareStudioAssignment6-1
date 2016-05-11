@@ -15,7 +15,7 @@ public class Character {
 	public float x, y, radius;
 	public String name;
 	public MainApplet parent;
-	private int episode;
+	private boolean insideNetwork;
 	private int color;
 	private ArrayList<Character> targets;
 	private float localX,localY;
@@ -28,16 +28,16 @@ public class Character {
 		this.y = y;
 		this.localX = x;
 		this.localY = y;
-		this.radius = 30;
+		this.radius = 40;
 		this.color = color;
+		this.insideNetwork = false;
 		targets = new ArrayList<Character>();
 	}
 
 	public void display(){
-		this.parent.stroke(color);
+		this.parent.noStroke();
 		this.parent.fill(color);
 		this.parent.ellipse(this.x, this.y, this.radius, this.radius);
-		this.parent.fill(0,0,0);
 	}
 	public void setPosition(float x,float y){
 		this.x = x;
@@ -53,5 +53,11 @@ public class Character {
 	
 	public ArrayList<Character> getTargets(){
 		return this.targets;
+	}
+	public void setInsideNetwork(boolean s){
+		this.insideNetwork = s;
+	}
+	public boolean getInsideNetwork(){
+		return this.insideNetwork;
 	}
 }
